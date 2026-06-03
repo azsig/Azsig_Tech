@@ -1,5 +1,6 @@
 import React from 'react';
 import { Layout, Database, Cloud, Cpu, CircuitBoard, Smartphone } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const ServiceCard: React.FC<{
   title: string;
@@ -9,7 +10,7 @@ const ServiceCard: React.FC<{
 }> = ({ title, description, icons, items }) => (
   <div style={{
     backgroundColor: 'var(--color-surface)',
-    padding: '3rem',
+    padding: 'min(3rem, 10%)',
     border: '1px solid rgba(255, 102, 0, 0.1)',
     transition: 'all 0.3s ease',
     position: 'relative',
@@ -39,35 +40,27 @@ const ServiceCard: React.FC<{
 );
 
 const Services: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section id="services">
       <div className="container">
         <div style={{ marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>CORE CAPABILITIES</h2>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>{t.services.title}</h2>
           <div style={{ width: '60px', height: '4px', backgroundColor: 'var(--color-primary)' }}></div>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(400px, 1fr))', gap: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 320px), 1fr))', gap: '2rem' }}>
           <ServiceCard 
-            title="Web Development"
-            description="High-performance, scalable web applications and cloud infrastructure designed for modern business needs."
+            title={t.services.web.title}
+            description={t.services.web.desc}
             icons={[<Layout size={24} />, <Database size={24} />, <Cloud size={24} />]}
-            items={[
-              "Custom Web Applications",
-              "System Integration",
-              "Cloud Architecture",
-              "Scalable Backend Systems"
-            ]}
+            items={t.services.web.items}
           />
           <ServiceCard 
-            title="IoT & Automation"
-            description="Precision hardware design and embedded systems that bridge the gap between physical and digital worlds."
+            title={t.services.iot.title}
+            description={t.services.iot.desc}
             icons={[<Cpu size={24} />, <CircuitBoard size={24} />, <Smartphone size={24} />]}
-            items={[
-              "Embedded Systems Design",
-              "Custom PCB & Hardware",
-              "Smart Device Protocols",
-              "Industrial Automation"
-            ]}
+            items={t.services.iot.items}
           />
         </div>
       </div>

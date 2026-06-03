@@ -1,7 +1,10 @@
 import React from 'react';
 import { Cpu, Code2 } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Hero: React.FC = () => {
+  const { t } = useLanguage();
+
   return (
     <section style={{ 
       minHeight: '100vh', 
@@ -13,17 +16,20 @@ const Hero: React.FC = () => {
       <div className="container">
         <div style={{ maxWidth: '800px' }}>
           <div className="mono accent-text" style={{ marginBottom: '1rem', fontSize: '0.9rem' }}>
-            [ INDEPENDENT TECHNOLOGY STUDIO ]
+            {t.hero.studio}
           </div>
           <h1 style={{ fontSize: '4rem', marginBottom: '1.5rem', lineHeight: '1.1' }}>
-            INTEGRATED <br />
-            DIGITAL SOLUTIONS
+            {t.hero.title.split('<br />').map((text, i) => (
+              <React.Fragment key={i}>
+                {text}
+                {i === 0 && <br />}
+              </React.Fragment>
+            ))}
           </h1>
           <p style={{ fontSize: '1.25rem', color: 'var(--color-text-dim)', marginBottom: '3rem' }}>
-            From high-performance web systems to precision hardware engineering. 
-            We build the infrastructure for the next generation of industry.
+            {t.hero.description}
           </p>
-          <div style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
+          <div className="hero-buttons" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
             <a href="https://katalog.azsig.my.id/" target="_blank" rel="noopener noreferrer" style={{
               backgroundColor: 'var(--color-primary)',
               color: 'white',
@@ -34,7 +40,7 @@ const Hero: React.FC = () => {
               alignItems: 'center',
               gap: '0.5rem'
             }}>
-              <Code2 size={20} /> VIEW CATALOG
+              <Code2 size={20} /> {t.hero.viewCatalog}
             </a>
             <a href="#services" style={{
               border: '1px solid rgba(255, 102, 0, 0.3)',
@@ -46,7 +52,7 @@ const Hero: React.FC = () => {
               alignItems: 'center',
               gap: '0.5rem'
             }}>
-               OUR SERVICES
+               {t.hero.ourServices}
             </a>
             <a href="#contact" style={{
               border: '1px solid var(--color-primary)',
@@ -58,7 +64,7 @@ const Hero: React.FC = () => {
               alignItems: 'center',
               gap: '0.5rem'
             }}>
-              <Cpu size={20} /> WORK WITH US
+              <Cpu size={20} /> {t.hero.workWithUs}
             </a>
           </div>
         </div>
